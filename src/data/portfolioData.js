@@ -1,5 +1,6 @@
 export const personalInfo = {
   name: "Simhadri Mukesh",
+  profileImage: "/profile.png", // Place your uploaded photo at public/profile.png (or .jpg)
   title: "Software Engineer & AI/ML Developer",
   taglines: [
     "Full-Stack Web & AI Developer",

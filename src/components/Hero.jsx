@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Mail, ExternalLink, Terminal, Sparkles, Award } from 'lucide-react';
+import { ArrowRight, Mail, ExternalLink, Sparkles, Award, GraduationCap, Cloud } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
@@ -7,6 +7,7 @@ export default function Hero({ darkMode }) {
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [profileImg, setProfileImg] = useState(personalInfo.profileImage || '/profile.png');
 
   useEffect(() => {
     const currentTagline = personalInfo.taglines[taglineIndex];
@@ -200,70 +201,87 @@ export default function Hero({ darkMode }) {
 
           </div>
 
-          {/* Right Column: Interactive Developer Card / Visual Terminal */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className={`w-full max-w-md rounded-2xl border transition-all duration-300 shadow-2xl relative group ${
-              darkMode
-                ? 'bg-slate-900/80 border-slate-800/90 shadow-indigo-950/20 backdrop-blur-xl'
-                : 'bg-white border-slate-200 shadow-xl shadow-slate-200/60 backdrop-blur-xl'
-            }`}>
+          {/* Right Column: Profile Photo Showcase */}
+          <div className="lg:col-span-5 flex justify-center items-center">
+            <div className="relative group w-full max-w-sm sm:max-w-md flex justify-center">
               
-              {/* Window Header */}
-              <div className={`flex items-center justify-between px-4 py-3 border-b ${
-                darkMode ? 'border-slate-800/80 bg-slate-950/60' : 'border-slate-100 bg-slate-50/80'
-              } rounded-t-2xl`}>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/90" />
-                  <div className="w-3 h-3 rounded-full bg-amber-500/90" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/90" />
-                </div>
-                <div className="flex items-center gap-1.5 font-mono text-xs text-slate-400">
-                  <Terminal size={13} className="text-indigo-400" />
-                  <span>mukesh@engineer:~</span>
-                </div>
-                <div className="w-8"></div>
-              </div>
+              {/* Ambient Glow behind Image */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition duration-500 -z-10" />
 
-              {/* Code / Profile Preview Content */}
-              <div className="p-5 font-mono text-xs sm:text-sm space-y-3">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <span className="text-emerald-400">➜</span>
-                  <span className="text-cyan-400">~</span>
-                  <span className={darkMode ? 'text-slate-300' : 'text-slate-700'}>whoami --full-profile</span>
+              {/* Main Photo Card Frame */}
+              <div className={`relative p-2 rounded-3xl border transition-all duration-300 shadow-2xl ${
+                darkMode
+                  ? 'bg-slate-900/90 border-slate-800 backdrop-blur-xl shadow-indigo-950/30'
+                  : 'bg-white/95 border-slate-200 backdrop-blur-xl shadow-xl shadow-slate-200'
+              }`}>
+                
+                {/* Photo Container with rounded corners */}
+                <div className="relative overflow-hidden rounded-2xl w-72 sm:w-80 h-96 sm:h-[420px] bg-slate-950 flex items-center justify-center">
+                  <img
+                    src={profileImg}
+                    alt={personalInfo.name}
+                    onError={() => {
+                      if (profileImg.endsWith('.png')) {
+                        setProfileImg('/profile.jpg');
+                      } else if (profileImg.endsWith('.jpg')) {
+                        setProfileImg('/profile.jpeg');
+                      } else if (!profileImg.endsWith('.svg')) {
+                        setProfileImg('/profile.svg');
+                      }
+                    }}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* Subtle inner shadow gradient overlay at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Name badge at bottom inside photo */}
+                  <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                    <p className="text-white font-bold text-lg leading-tight drop-shadow-md">
+                      {personalInfo.name}
+                    </p>
+                    <p className="text-indigo-300 text-xs font-mono drop-shadow">
+                      Software & AI Engineer
+                    </p>
+                  </div>
                 </div>
 
-                <div className={`p-4 rounded-xl border leading-relaxed ${
-                  darkMode ? 'bg-slate-950/70 border-slate-800/60 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+                {/* Floating Badge 1: LeetCode Knight */}
+                <div className={`absolute -top-3 -right-2 sm:-right-4 px-3.5 py-1.5 rounded-xl border shadow-lg flex items-center gap-2 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
+                  darkMode
+                    ? 'bg-slate-900/95 border-amber-500/40 text-amber-400 shadow-black/40'
+                    : 'bg-white/95 border-amber-300 text-amber-600 shadow-slate-300'
                 }`}>
-                  <p><span className="text-indigo-400 font-semibold">name</span>: <span className="text-emerald-400">"Simhadri Mukesh"</span>,</p>
-                  <p><span className="text-indigo-400 font-semibold">university</span>: <span className="text-emerald-400">"GVP College of Engg."</span>,</p>
-                  <p><span className="text-indigo-400 font-semibold">degree</span>: <span className="text-emerald-400">"B.Tech CSE"</span>,</p>
-                  <p><span className="text-indigo-400 font-semibold">cgpa</span>: <span className="text-amber-400">8.75</span>,</p>
-                  <p><span className="text-indigo-400 font-semibold">internship</span>: <span className="text-emerald-400">"AWS Academy (AI/ML)"</span>,</p>
-                  <p><span className="text-indigo-400 font-semibold">coding</span>: &#123;</p>
-                  <p className="pl-4"><span className="text-purple-400">leetcode</span>: <span className="text-amber-400">"Knight (650+ solved)"</span>,</p>
-                  <p className="pl-4"><span className="text-purple-400">codechef</span>: <span className="text-amber-400">"3-Star Rated"</span>,</p>
-                  <p className="pl-4"><span className="text-purple-400">totalDSA</span>: <span className="text-cyan-400">"750+ Solved"</span></p>
-                  <p>&#125;,</p>
-                  <p><span className="text-indigo-400 font-semibold">coreStack</span>: [</p>
-                  <p className="pl-4 text-cyan-400">"FastAPI", "PyTorch", "React", "AWS", "Three.js"</p>
-                  <p>]</p>
-                </div>
-
-                {/* Live Activity indicator */}
-                <div className={`flex items-center justify-between pt-2 text-xs border-t ${
-                  darkMode ? 'border-slate-800/80 text-slate-400' : 'border-slate-200 text-slate-500'
-                }`}>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Status: Available for SDE / AI Roles</span>
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                   </span>
-                  <span className="text-indigo-400 font-mono">2025-2026</span>
+                  <Award size={14} className="text-amber-500" />
+                  <span>LeetCode Knight</span>
                 </div>
+
+                {/* Floating Badge 2: GVPCE Education */}
+                <div className={`absolute -bottom-3 -left-2 sm:-left-4 px-3.5 py-1.5 rounded-xl border shadow-lg flex items-center gap-2 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
+                  darkMode
+                    ? 'bg-slate-900/95 border-indigo-500/40 text-indigo-300 shadow-black/40'
+                    : 'bg-white/95 border-indigo-200 text-indigo-700 shadow-slate-300'
+                }`}>
+                  <GraduationCap size={15} className="text-indigo-500" />
+                  <span>GVPCE (8.75 CGPA)</span>
+                </div>
+
+                {/* Floating Badge 3: AWS Intern */}
+                <div className={`absolute bottom-16 -right-3 sm:-right-5 px-3 py-1.5 rounded-xl border shadow-lg flex items-center gap-1.5 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
+                  darkMode
+                    ? 'bg-slate-900/95 border-cyan-500/40 text-cyan-400 shadow-black/40'
+                    : 'bg-white/95 border-cyan-300 text-cyan-700 shadow-slate-300'
+                }`}>
+                  <Cloud size={14} className="text-cyan-500" />
+                  <span>AWS Academy</span>
+                </div>
+
               </div>
 
-              {/* Bottom Subtle Glow Accent */}
-              <div className="absolute -bottom-1 -right-1 -left-1 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 rounded-b-2xl opacity-60"></div>
             </div>
           </div>
 
