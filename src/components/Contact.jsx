@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, ExternalLink, MessageSquare, AlertCircle, Sparkles } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { GithubIcon, LinkedinIcon, LeetCodeIcon } from './Icons';
 import { personalInfo, contactConfig } from '../data/portfolioData';
 
 export default function Contact({ darkMode }) {
@@ -166,15 +166,6 @@ export default function Contact({ darkMode }) {
                 </span>
                 <div className="flex flex-wrap gap-2">
                   <a
-                    href={personalInfo.socials.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-colors"
-                  >
-                    <LinkedinIcon className="w-3.5 h-3.5" />
-                    <span>LinkedIn</span>
-                  </a>
-                  <a
                     href={personalInfo.socials.github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -184,12 +175,29 @@ export default function Contact({ darkMode }) {
                     <span>GitHub</span>
                   </a>
                   <a
+                    href={personalInfo.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-colors"
+                  >
+                    <LinkedinIcon className="w-3.5 h-3.5" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <a
                     href={personalInfo.socials.leetcode}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
                   >
+                    <LeetCodeIcon className="w-3.5 h-3.5" />
                     <span>LeetCode</span>
+                  </a>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+                  >
+                    <Mail size={14} />
+                    <span>Email</span>
                   </a>
                 </div>
               </div>

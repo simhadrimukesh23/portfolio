@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUp, Heart } from 'lucide-react';
+import { ArrowUp, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, LeetCodeIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Footer({ darkMode }) {
@@ -29,9 +30,58 @@ export default function Footer({ darkMode }) {
             </div>
           </div>
 
-          {/* Centered Note */}
-          <div className="text-xs text-center flex items-center gap-1.5 font-mono">
-            <span>Engineered with React, Vite & Tailwind CSS</span>
+          {/* Social Icons: GitHub, LinkedIn, LeetCode, Email only */}
+          <div className="flex items-center gap-3">
+            <a
+              href={personalInfo.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-lg border transition-all ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:border-indigo-500'
+                  : 'border-slate-200 bg-white text-slate-600 hover:text-indigo-600 hover:border-indigo-300 shadow-sm'
+              }`}
+              title="GitHub"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={personalInfo.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-lg border transition-all ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900 text-slate-400 hover:text-blue-400 hover:border-blue-500'
+                  : 'border-slate-200 bg-white text-slate-600 hover:text-blue-600 hover:border-blue-300 shadow-sm'
+              }`}
+              title="LinkedIn"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={personalInfo.socials.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-lg border transition-all ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900 text-amber-400 hover:border-amber-500'
+                  : 'border-slate-200 bg-white text-amber-600 hover:border-amber-400 shadow-sm'
+              }`}
+              title="LeetCode"
+            >
+              <LeetCodeIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className={`p-2 rounded-lg border transition-all ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900 text-slate-400 hover:text-emerald-400 hover:border-emerald-500'
+                  : 'border-slate-200 bg-white text-slate-600 hover:text-emerald-600 hover:border-emerald-300 shadow-sm'
+              }`}
+              title={`Email: ${personalInfo.email}`}
+            >
+              <Mail size={16} />
+            </a>
           </div>
 
           {/* Back to top */}

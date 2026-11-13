@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Mail, ExternalLink, Sparkles, Award } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
+import { GithubIcon, LinkedinIcon, LeetCodeIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Hero({ darkMode }) {
@@ -168,21 +168,6 @@ export default function Hero({ darkMode }) {
                 title="LeetCode Knight (650+ Solved)"
               >
                 <LeetCodeIcon className="w-[18px] h-[18px]" />
-              </a>
-
-              {/* CodeChef */}
-              <a
-                href={personalInfo.socials.codechef}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`p-2.5 rounded-lg border transition-all duration-200 ${
-                  darkMode
-                    ? 'border-slate-800 bg-slate-900/60 text-orange-400 hover:border-orange-500 hover:bg-orange-500/10'
-                    : 'border-slate-200 bg-white text-orange-600 hover:border-orange-400 hover:bg-orange-50 shadow-sm'
-                }`}
-                title="CodeChef 3-Star Coder"
-              >
-                <CodeChefIcon className="w-[18px] h-[18px]" />
               </a>
 
               {/* Email */}

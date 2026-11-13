@@ -1,9 +1,8 @@
 export const contactConfig = {
   // Free Direct Email Integration (Web3Forms):
-  // 1. Visit https://web3forms.com
-  // 2. Enter your email (simhadrimukesh111@gmail.com) to get your free Access Key instantly
-  // 3. Paste the key below:
-  web3formsKey: "", 
+  // 1. Get your free key at https://web3forms.com (takes 10 seconds)
+  // 2. Paste your Access Key between the quotes below:
+  web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || "", 
 };
 
 export const personalInfo = {
