@@ -1,3 +1,11 @@
+export const contactConfig = {
+  // Free Direct Email Integration (Web3Forms):
+  // 1. Visit https://web3forms.com
+  // 2. Enter your email (simhadrimukesh111@gmail.com) to get your free Access Key instantly
+  // 3. Paste the key below:
+  web3formsKey: "", 
+};
+
 export const personalInfo = {
   name: "Simhadri Mukesh",
   profileImage: "/profile.png", // Place your uploaded photo at public/profile.png (or .jpg)

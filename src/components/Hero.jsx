@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Mail, ExternalLink, Sparkles, Award, GraduationCap, Cloud } from 'lucide-react';
+import { ArrowRight, Mail, ExternalLink, Sparkles, Award } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, LeetCodeIcon, CodeChefIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
@@ -214,7 +214,6 @@ export default function Hero({ darkMode }) {
                   ? 'bg-slate-900/90 border-slate-800 backdrop-blur-xl shadow-indigo-950/30'
                   : 'bg-white/95 border-slate-200 backdrop-blur-xl shadow-xl shadow-slate-200'
               }`}>
-                
                 {/* Photo Container with rounded corners */}
                 <div className="relative overflow-hidden rounded-2xl w-72 sm:w-80 h-96 sm:h-[420px] bg-slate-950 flex items-center justify-center">
                   <img
@@ -231,55 +230,7 @@ export default function Hero({ darkMode }) {
                     }}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-
-                  {/* Subtle inner shadow gradient overlay at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Name badge at bottom inside photo */}
-                  <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
-                    <p className="text-white font-bold text-lg leading-tight drop-shadow-md">
-                      {personalInfo.name}
-                    </p>
-                    <p className="text-indigo-300 text-xs font-mono drop-shadow">
-                      Software & AI Engineer
-                    </p>
-                  </div>
                 </div>
-
-                {/* Floating Badge 1: LeetCode Knight */}
-                <div className={`absolute -top-3 -right-2 sm:-right-4 px-3.5 py-1.5 rounded-xl border shadow-lg flex items-center gap-2 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
-                  darkMode
-                    ? 'bg-slate-900/95 border-amber-500/40 text-amber-400 shadow-black/40'
-                    : 'bg-white/95 border-amber-300 text-amber-600 shadow-slate-300'
-                }`}>
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                  </span>
-                  <Award size={14} className="text-amber-500" />
-                  <span>LeetCode Knight</span>
-                </div>
-
-                {/* Floating Badge 2: GVPCE Education */}
-                <div className={`absolute -bottom-3 -left-2 sm:-left-4 px-3.5 py-1.5 rounded-xl border shadow-lg flex items-center gap-2 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
-                  darkMode
-                    ? 'bg-slate-900/95 border-indigo-500/40 text-indigo-300 shadow-black/40'
-                    : 'bg-white/95 border-indigo-200 text-indigo-700 shadow-slate-300'
-                }`}>
-                  <GraduationCap size={15} className="text-indigo-500" />
-                  <span>GVPCE (8.75 CGPA)</span>
-                </div>
-
-                {/* Floating Badge 3: AWS Intern */}
-                <div className={`absolute bottom-16 -right-3 sm:-right-5 px-3 py-1.5 rounded-xl border shadow-lg flex items-center gap-1.5 text-xs font-semibold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
-                  darkMode
-                    ? 'bg-slate-900/95 border-cyan-500/40 text-cyan-400 shadow-black/40'
-                    : 'bg-white/95 border-cyan-300 text-cyan-700 shadow-slate-300'
-                }`}>
-                  <Cloud size={14} className="text-cyan-500" />
-                  <span>AWS Academy</span>
-                </div>
-
               </div>
 
             </div>

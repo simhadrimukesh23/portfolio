@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, ExternalLink, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, ExternalLink, MessageSquare, AlertCircle, Sparkles } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, contactConfig } from '../data/portfolioData';
 
 export default function Contact({ darkMode }) {
   const [formData, setFormData] = useState({
@@ -12,24 +12,57 @@ export default function Contact({ darkMode }) {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sendMethod, setSendMethod] = useState(''); // 'direct' or 'mailto'
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
 
-    // Simulate sending with high-end UX feedback
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      
-      // Also open mailto as fallback so user really receives the message
-      const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Hi Simhadri,\n\n${formData.message}\n\nFrom: ${formData.name} (${formData.email})`)}`;
-      window.open(mailtoUrl, '_blank');
-    }, 800);
+    // Check if Web3Forms key is present
+    if (contactConfig?.web3formsKey && contactConfig.web3formsKey.trim() !== '') {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: contactConfig.web3formsKey,
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || `New message from ${formData.name} via Portfolio`,
+            message: formData.message,
+            from_name: formData.name,
+          })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          setIsSubmitting(false);
+          setSubmitted(true);
+          setSendMethod('direct');
+          return;
+        } else {
+          throw new Error(data.message || 'Direct transmission failed');
+        }
+      } catch (err) {
+        console.warn('Direct send failed, opening default mail client:', err);
+      }
+    }
+
+    // Default Fallback: Open mailto link so the message is never lost
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Hi Simhadri,\n\n${formData.message}\n\nFrom: ${formData.name} (${formData.email})`)}`;
+    window.location.href = mailtoUrl;
+    setIsSubmitting(false);
+    setSubmitted(true);
+    setSendMethod('mailto');
   };
 
   return (
@@ -178,17 +211,21 @@ export default function Contact({ darkMode }) {
 
               {submitted ? (
                 <div className="p-8 text-center rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                  <CheckCircle2 size={48} className="mx-auto mb-4 animate-bounce" />
-                  <h4 className="text-lg font-bold text-white mb-2">Message Prepared!</h4>
+                  <CheckCircle2 size={48} className="mx-auto mb-4 animate-bounce text-emerald-400" />
+                  <h4 className="text-lg font-bold text-white mb-2">
+                    {sendMethod === 'direct' ? 'Message Sent Directly!' : 'Message Prepared!'}
+                  </h4>
                   <p className="text-sm text-slate-300 max-w-md mx-auto mb-6">
-                    Thank you! Your default mail client has opened to send this directly to <strong>{personalInfo.email}</strong>.
+                    {sendMethod === 'direct'
+                      ? <>Your message has been delivered straight to my inbox (<strong>{personalInfo.email}</strong>). I will get back to you shortly!</>
+                      : <>Your default email app has opened with your message prefilled for <strong>{personalInfo.email}</strong>.</>}
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({ name: '', email: '', subject: '', message: '' });
                     }}
-                    className="px-5 py-2 rounded-xl text-xs font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors"
+                    className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors shadow-md"
                   >
                     Send another message
                   </button>
@@ -272,14 +309,20 @@ export default function Contact({ darkMode }) {
                     ></textarea>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 shadow-md shadow-indigo-500/25 transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50"
-                  >
-                    <Send size={16} />
-                    <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 shadow-md shadow-indigo-500/25 transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50"
+                    >
+                      <Send size={16} />
+                      <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                    </button>
+
+                    <span className="text-[11px] text-slate-500 font-mono">
+                      ✉️ Directly to {personalInfo.email}
+                    </span>
+                  </div>
                 </form>
               )}
             </div>
