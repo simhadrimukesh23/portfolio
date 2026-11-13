@@ -8,7 +8,7 @@ export const contactConfig = {
 
 export const personalInfo = {
   name: "Simhadri Mukesh",
-  profileImage: "/profile.png", // Place your uploaded photo at public/profile.png (or .jpg)
+  profileImage: "/profile.jpg", // Photo in public/profile.jpg
   title: "Software Engineer & AI/ML Developer",
   taglines: [
     "Full-Stack Web & AI Developer",
