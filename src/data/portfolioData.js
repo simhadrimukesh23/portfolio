@@ -11,19 +11,19 @@ export const personalInfo = {
   title: "Software Engineer & AI/ML Developer",
   taglines: [
     "Full-Stack Web & AI Developer",
-    "LeetCode Knight (750+ Solved)",
+    "LeetCode Knight (800+ Solved)",
     "AWS Academy Intern",
-    "Three.js & GenAI Enthusiast"
+    "GenAI Enthusiast"
   ],
-  bio: "B.Tech Computer Science Engineering undergraduate at Gayatri Vidya Parishad College of Engineering (CGPA: 8.75) with hands-on exposure to cloud infrastructure (AWS) and AI/ML workflows. A consistent, disciplined problem solver with 750+ solved coding problems, LeetCode Knight badge, and 3-star competitive programming rating.",
+  bio: "B.Tech Computer Science Engineering undergraduate at Gayatri Vidya Parishad College of Engineering (CGPA: 8.70) with hands-on exposure to cloud infrastructure (AWS) and AI/ML workflows. A consistent, disciplined problem solver with 750+ solved coding problems, LeetCode Knight badge, and 3-star competitive programming rating.",
   location: "Visakhapatnam, India",
   email: "simhadrimukesh111@gmail.com",
   phone: "+91 9398841355",
   socials: {
     github: "https://github.com/simhadrimukesh23",
-    linkedin: "https://linkedin.com/in/simhadrimukesh",
+    linkedin: "https://www.linkedin.com/in/simhadri-mukesh-b2a018301/",
     leetcode: "https://leetcode.com/u/Mukesh225",
-    codechef: "https://codechef.com/users/simhadrimukesh"
+    codechef: "https://www.codechef.com/users/simhadrimukesh"
   },
   stats: [
     { label: "Problems Solved", value: "750+", suffix: "DSA", description: "Across LeetCode & CodeChef" },
